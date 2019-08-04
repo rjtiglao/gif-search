@@ -30,9 +30,11 @@ let play = function(e){
 let func = function(e){
 
     let searchQuery = e.getAttribute(`value`);
-    let key = "wNn70PU5687UBNk6pNoCSTZg4wtcdzg1";
-    let queryUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchQuery}&limit=10&offset=0&rating=G&lang=en`
+    let rate = e.getAttribute(`rating`);
 
+    let key = "wNn70PU5687UBNk6pNoCSTZg4wtcdzg1";
+    let queryUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchQuery}&limit=10&offset=0&rating=${rate}&lang=en`
+    console.log(queryUrl);
     fetch(queryUrl)
     .then(function(response) {
         return response.json();
@@ -74,9 +76,12 @@ window.onload = function(){
 // On submit create a new button
 document.getElementById("submit").onclick = function(){
     let userInput = document.getElementById(`search-term`).value.trim();
+    let rating = document.getElementById(`rate-select`).value.trim();
+    console.log(rating);
     let createButtons = document.createElement(`button`);
     createButtons.id = `button${count}${userInput}`;
     createButtons.className = `topic-button`;
+    createButtons.setAttribute(`rating`,rating);
     createButtons.setAttribute(`onclick`,`func(this)`);
     createButtons.setAttribute(`value`,`${userInput}`);
     document.getElementById("buttonContainer").appendChild(createButtons);
