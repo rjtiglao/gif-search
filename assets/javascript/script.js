@@ -12,6 +12,20 @@ let count = 0;
 
 
 //pause and play on click
+let play = function(e){
+    let still = e.getAttribute(`still`);
+    let startUrl = e.getAttribute(`data-start`);
+    let pauseUrl = e.getAttribute(`data-still`);
+   if(still==="yes"){
+    e.setAttribute(`still`,"no");
+    e.setAttribute(`src`, startUrl);
+    
+   }
+   else if (still==="no"){
+       e.setAttribute(`still`,"yes");
+       e.setAttribute(`src`, pauseUrl);
+   }
+}
 
 //Prepends all the gifs on window
 let func = function(e){
@@ -29,7 +43,7 @@ let func = function(e){
         for(i=0;i<10; i++){
             let createImg = document.createElement(`img`);
             console.log(myJson["data"][i]["images"]["fixed_height_still"]["url"]);
-            createButtons.setAttribute(`onclick`,`play(this)`);
+            createImg.setAttribute(`onclick`,`play(this)`);
             createImg.setAttribute(`data-still`,`${myJson["data"][i]["images"]["fixed_height_still"]["url"]}`);
             createImg.setAttribute(`data-start`,`${myJson["data"][i]["images"]["fixed_height"]["url"]}`);
             createImg.setAttribute(`still`,`yes`);
