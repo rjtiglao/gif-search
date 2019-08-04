@@ -3,7 +3,17 @@
 // let key = "wNn70PU5687UBNk6pNoCSTZg4wtcdzg1";
 // let queryUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchQuery}&limit=10&offset=0&rating=G&lang=en`
 
+// VARIABLES/ARRAYS
+// cartoons topics
+let topics = ["Simpsons", "Akira", "Code Gease"];
+let count = 0;
 
+//FUNCTIONS
+
+
+//pause and play on click
+
+//Prepends all the gifs on window
 let func = function(e){
 
     let searchQuery = e.getAttribute(`value`);
@@ -18,38 +28,16 @@ let func = function(e){
         
         for(i=0;i<10; i++){
             let createImg = document.createElement(`img`);
-            console.log(myJson["data"][i]["images"]["fixed_height_small"]["url"]);
-            // createImg.setAttribute(`value`,`${myJson["data"][0]["title"]}`);
-            createImg.src = `${myJson["data"][i]["images"]["fixed_height_small"]["url"]}`;
+            console.log(myJson["data"][i]["images"]["fixed_height_still"]["url"]);
+            createButtons.setAttribute(`onclick`,`play(this)`);
+            createImg.setAttribute(`data-still`,`${myJson["data"][i]["images"]["fixed_height_still"]["url"]}`);
+            createImg.setAttribute(`data-start`,`${myJson["data"][i]["images"]["fixed_height"]["url"]}`);
+            createImg.setAttribute(`still`,`yes`);
+            createImg.src = `${myJson["data"][i]["images"]["fixed_height_still"]["url"]}`;
             document.getElementById("gifContainer").prepend(createImg);
         }
     });
 }
-// fetch(queryUrl)
-//   .then(function(response) {
-//     return response.json();
-//   })
-//   .then(function(myJson) {
-//     let createImg = document.createElement(`img`);
-//     console.log(myJson["data"][0]["images"]["fixed_height_small"]["url"]);
-//     // createImg.setAttribute(`value`,`${myJson["data"][0]["title"]}`);
-//     createImg.src = `${myJson["data"][0]["images"]["fixed_height_small"]["url"]}`;
-//     document.getElementById("gifContainer").appendChild(createImg);
- 
-//   });
-
-
-
-// VARIABLES/ARRAYS
-// cartoons topics
-let topics = ["Simpsons", "Akira", "Code Gease"];
-let count = 0;
-
-// Your app should take the topics in this array and create buttons in your HTML.
-
-
-//FUNCTIONS
-
 
 // Creates a button for each topic
 window.onload = function(){
