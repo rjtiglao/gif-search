@@ -4,15 +4,26 @@ let key = "wNn70PU5687UBNk6pNoCSTZg4wtcdzg1";
 let queryUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchQuery}&limit=10&offset=0&rating=G&lang=en`
 
 
+
+// let buildQuery= function(){
+
+
+
+
+
+// }
 fetch(queryUrl)
   .then(function(response) {
     return response.json();
   })
   .then(function(myJson) {
-    console.log(myJson.data);
+    let createImg = document.createElement(`img`);
+    console.log(myJson["data"][0]["images"]["fixed_height_small"]["url"]);
+    // createImg.setAttribute(`value`,`${myJson["data"][0]["title"]}`);
+    createImg.src = `${myJson["data"][0]["images"]["fixed_height_small"]["url"]}`;
+    document.getElementById("gifContainer").appendChild(createImg);
+ 
   });
-
-console.log(data.type);
 
 
 
@@ -29,13 +40,13 @@ let count = 0;
 //Display image
 document.getElementById("submit").onclick = function(){
 let createImg = document.createElement(`img`);
-createButtons.id = `img`;
-createButtons.className = `topic-button`;
-createButtons.setAttribute(`value`,`${topics[i]}`);
+createButtons.setAttribute(`value`,`${myJson["data"][0]}`);
 document.getElementById("buttonContainer").appendChild(createButtons);
 document.getElementById(`button${count}${topics[i]}`).innerHTML = `${topics[i]}`;   
 count++ 
 }
+
+
 // Creates a button for each topic
 window.onload = function(){
     for(i=0;i<topics.length;i++){
