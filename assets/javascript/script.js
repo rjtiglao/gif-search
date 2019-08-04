@@ -1,53 +1,72 @@
-// // function buildQueryURL() {
-// //     // queryURL is the url we'll use to query the API
-// //     var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
-  
-// //     // Begin building an object to contain our API call's query parameters
-// //     // Set the API key
-// //     var queryParams = { "api-key": "R1a31F4tBjCUaM2ho8GtIFsrSdtXt30M" };
-  
-// //     // Grab text the user typed into the search input, add to the queryParams object
-// //     queryParams.q = $("#search-term")
-// //       .val()
-// //       .trim();
+// API VALIDATIONS
+let searchQuery = "Simpsons";
+let key = "wNn70PU5687UBNk6pNoCSTZg4wtcdzg1";
+let queryUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchQuery}&limit=10&offset=0&rating=G&lang=en`
 
-// //     // Logging the URL so we have access to it for troubleshooting
-// //     console.log("---------------\nURL: " + queryURL + "\n---------------");
-// //     console.log(queryURL + $.param(queryParams));
-// //     return queryURL + $.param(queryParams);
-// //   }
+
+fetch(queryUrl)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson.data);
+  });
+
+console.log(data.type);
+
+
 
 // VARIABLES/ARRAYS
 // cartoons topics
 let topics = ["Simpsons", "Akira", "Code Gease"];
-
+let count = 0;
 
 // Your app should take the topics in this array and create buttons in your HTML.
 
 
 //FUNCTIONS
 
+//Display image
+document.getElementById("submit").onclick = function(){
+let createImg = document.createElement(`img`);
+createButtons.id = `img`;
+createButtons.className = `topic-button`;
+createButtons.setAttribute(`value`,`${topics[i]}`);
+document.getElementById("buttonContainer").appendChild(createButtons);
+document.getElementById(`button${count}${topics[i]}`).innerHTML = `${topics[i]}`;   
+count++ 
+}
 // Creates a button for each topic
 window.onload = function(){
     for(i=0;i<topics.length;i++){
+
         let createButtons = document.createElement(`button`);
-        createButtons.id = `button${i}${topics[i]}`;
+        createButtons.id = `button${count}${topics[i]}`;
         createButtons.className = `topic-button`;
         createButtons.setAttribute(`value`,`${topics[i]}`);
         document.getElementById("buttonContainer").appendChild(createButtons);
-        document.getElementById(`button${i}${topics[i]}`).innerHTML = `${topics[i]}`;    
+        document.getElementById(`button${count}${topics[i]}`).innerHTML = `${topics[i]}`;   
+        count++ 
     }
 };
 
 
-// On submit code
+// On submit create a new button
 document.getElementById("submit").onclick = function(){
-    let userInput = document.getElementById("search-term").value;
-    
-
-    
-
+    let userInput = document.getElementById(`search-term`).value.trim();
+    let createButtons = document.createElement(`button`);
+    createButtons.id = `button${count}${userInput}`;
+    createButtons.className = `topic-button`;
+    createButtons.setAttribute(`value`,`${userInput}`);
+    document.getElementById("buttonContainer").appendChild(createButtons);
+    document.getElementById(`button${count}${userInput}`).innerHTML = `${userInput}`;  
+    count++  
 };
+
+
+
+
+
 // Try using a loop that appends a button for each string in the array.
 // When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
 
