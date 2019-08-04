@@ -66,25 +66,45 @@ window.onload = function(){
         createButtons.className = `topic-button`;
         createButtons.setAttribute(`value`,`${topics[i]}`);
         createButtons.setAttribute(`onclick`,`func(this)`);
+        createButtons.setAttribute(`rating`,"G");
         document.getElementById("buttonContainer").appendChild(createButtons);
         document.getElementById(`button${count}${topics[i]}`).innerHTML = `${topics[i]}`;   
         count++ 
     }
 };
 
+//recreate buttons for each topic
+let remove = function(){
+    let child = document.getElementById(`buttonContainer`).lastElementChild;  
 
-// On submit create a new button
+    while (child) { 
+        document.getElementById(`buttonContainer`).removeChild(child); 
+        child = document.getElementById(`buttonContainer`).lastElementChild; 
+    } 
+   console.log("Removed all child elements")
+}
+
+let recreateBtn = function(r,u){
+    remove();
+    topics.push(u);
+    for(i=0;i<topics.length;i++){
+        let createButtons = document.createElement(`button`);
+        createButtons.id = `button${count}${topics[i]}`;
+        createButtons.className = `topic-button`;
+        createButtons.setAttribute(`value`,`${topics[i]}`);
+        createButtons.setAttribute(`onclick`,`func(this)`);
+        createButtons.setAttribute(`rating`,r);
+        document.getElementById("buttonContainer").appendChild(createButtons);
+        document.getElementById(`button${count}${topics[i]}`).innerHTML = `${topics[i]}`;   
+        count++ 
+    }
+
+    console.log("Finished adding all child elements")
+};
+
+// On submit recreate buttons
 document.getElementById("submit").onclick = function(){
     let userInput = document.getElementById(`search-term`).value.trim();
     let rating = document.getElementById(`rate-select`).value.trim();
-    console.log(rating);
-    let createButtons = document.createElement(`button`);
-    createButtons.id = `button${count}${userInput}`;
-    createButtons.className = `topic-button`;
-    createButtons.setAttribute(`rating`,rating);
-    createButtons.setAttribute(`onclick`,`func(this)`);
-    createButtons.setAttribute(`value`,`${userInput}`);
-    document.getElementById("buttonContainer").appendChild(createButtons);
-    document.getElementById(`button${count}${userInput}`).innerHTML = `${userInput}`;  
-    count++  
+    recreateBtn(rating,userInput);
 };
