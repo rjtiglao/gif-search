@@ -10,7 +10,6 @@ let count = 0;
 
 //FUNCTIONS
 
-
 //pause and play on click
 let play = function(e){
     let still = e.getAttribute(`still`);
@@ -42,13 +41,16 @@ let func = function(e){
         
         for(i=0;i<10; i++){
             let createImg = document.createElement(`img`);
+            let createRate = document.createElement(`p`);
             console.log(myJson["data"][i]["images"]["fixed_height_still"]["url"]);
             createImg.setAttribute(`onclick`,`play(this)`);
             createImg.setAttribute(`data-still`,`${myJson["data"][i]["images"]["fixed_height_still"]["url"]}`);
             createImg.setAttribute(`data-start`,`${myJson["data"][i]["images"]["fixed_height"]["url"]}`);
             createImg.setAttribute(`still`,`yes`);
             createImg.src = `${myJson["data"][i]["images"]["fixed_height_still"]["url"]}`;
+            createRate.innerHTML = `Rating: ${myJson["data"][i]["rating"]}`; 
             document.getElementById("gifContainer").prepend(createImg);
+            document.getElementById("gifContainer").prepend(createRate);
         }
     });
 }
